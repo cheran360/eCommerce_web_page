@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
     'rest_framework',
+    'storages'
 ]
 
 REST_FRAMEWORK = {
@@ -122,8 +123,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'amaze',
+        'USER':'cherankumar',
+        'PASSWORD':'Micro2002',
+        'HOST':'amaze-identifier.cfzbfdl735ea.us-east-1.rds.amazonaws.com',
+        'PORT':'5432'
     }
 }
 
@@ -180,3 +185,12 @@ MEDIA_ROOT='static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
+
+AWS_QUERYSTRING_AUTH = False
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = 'AKIAS7LED2ADHBXMBQFR'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'amaze-bucket-app'

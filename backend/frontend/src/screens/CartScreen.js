@@ -87,7 +87,7 @@ const CartScreen = ({match,location,history}) => {
                         <ListGroup.Item>
                             <h2>Subtotal ({cartItems.reduce((acc,item)=>acc+item.qty,0)}) Items</h2>
                             Rs.{cartItems.reduce((acc,item)=> acc + item.qty *
-                             parseInt(item.price.replace(/\,/g, ''),10),0).toFixed(2)}
+                            parseInt(item.price.replace(/\,/g, ''),10),0).toFixed(2)}
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Button
