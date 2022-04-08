@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ajr(569&#d6(3j6*k9t5m#16x+1bh9zb)2_p**503&a7w@hy&&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', "amaze-app.herokuapp.com"]
 
 
 # Application definition
@@ -86,6 +86,8 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -126,7 +128,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'amaze',
         'USER':'cherankumar',
-        'PASSWORD':'Micro2002',
+        'PASSWORD':os.environ.get('DB_PASS'),
         'HOST':'amaze-identifier.cfzbfdl735ea.us-east-1.rds.amazonaws.com',
         'PORT':'5432'
     }
@@ -178,7 +180,8 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/images/'
 
-MEDIA_ROOT='static/images'
+MEDIA_ROOT = BASE_DIR / 'static/images'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -190,7 +193,11 @@ AWS_QUERYSTRING_AUTH = False
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = 'AKIAS7LED2ADHBXMBQFR'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 AWS_STORAGE_BUCKET_NAME = 'amaze-bucket-app'
+
+# cwd - current working directory
+if os.getcwd() == '/app':
+    DEBUG = False
